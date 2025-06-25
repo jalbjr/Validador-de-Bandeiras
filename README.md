@@ -3,9 +3,6 @@ Desafio DIO para validação de bandeiras de cartão de crédito
 Este projeto implementa um identificador de bandeiras de cartões de crédito, com validação completa usando expressões regulares e o algoritmo de **Luhn**, garantindo que o número do cartão seja válido antes da identificação da bandeira.
 import re
 
-class CartaoInvalidoException(Exception):
-    pass
-
 class BandeiraCartao:
     bandeiras = {
         "Visa": r"^4\d{12}(\d{3})?$",
@@ -46,31 +43,3 @@ class BandeiraCartao:
                     n -= 9
             total += n
         return total % 10 == 0
-
-# Testes
-if __name__ == "__main__":
-    exemplos = {
-        "4111 1111 1111 1111": "Visa",
-        "5500 0000 0000 0004": "Mastercard",
-        "3400 0000 0000 009": "Amex",
-        "3000 0000 0000 04": "Diners Club",
-        "6011 0000 0000 0004": "Discover",
-        "3528 0000 0000 0000": "JCB",
-        "8699 0000 0000 0000": "Voyager",
-        "6062 8200 0000 0000": "Hipercard",
-        "5078 1234 5678 9012": "Aura",
-        "1234 5678 9012 3456": None  # inválido
-    }
-
-    for numero, esperado in exemplos.items():
-        try:
-            resultado = BandeiraCartao.identificar(numero)
-            if resultado == esperado:
-                print(f"{numero} ➜ {resultado} ✅")
-            else:
-                print(f"{numero} ➜ {resultado} ❌ (esperado: {esperado})")
-        except CartaoInvalidoException as e:
-            if esperado is None:
-                print(f"{numero} ➜ Rejeitado corretamente ❌ ({e})")
-            else:
-                print(f"{numero} ➜ Erro: {e}")
