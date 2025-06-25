@@ -3,7 +3,7 @@ Desafio DIO para validação de bandeiras de cartão de crédito
 Este projeto implementa um identificador de bandeiras de cartões de crédito, com validação completa usando expressões regulares e o algoritmo de **Luhn**, garantindo que o número do cartão seja válido antes da identificação da bandeira.
 import re
 
-class BandeiraCartao:
+@class BandeiraCartao:
     bandeiras = {
         "Visa": r"^4\d{12}(\d{3})?$",
         "Mastercard": r"^5[1-5]\d{14}$|^2(2[2-9][1-9]|[3-6]\d{2}|7([01]\d|20))\d{12}$",
